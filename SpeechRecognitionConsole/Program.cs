@@ -25,25 +25,19 @@ namespace SpeechRecognitionConsole
             engine.SpeechRecognitionRejected += SpeechRecognitionEngine_SpeechRecognitionRejected;
             engine.RecognizeCompleted += SpeechRecognistionEngine_RecognizeCompleted;
 
-            var grammar = new Grammar(new GrammarBuilder(new Choices(new[]
-            {
-                "生活満足度",
-                "せいかつまんぞくど",
-                "冷蔵庫"
-            })));
-            engine.LoadGrammarAsync(grammar);
+            engine.LoadGrammarAsync(new Grammar(Settings.Default.GrammarFileName));
 
             engine.RecognizeAsync(RecognizeMode.Multiple);
         }
 
         static void SpeechRecognitionEngine_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
         {
-            Debug.Print("SpeechRecognitionRejected");
+            Console.WriteLine("SpeechRecognitionRejected");
         }
 
         static void SpeechRecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            Debug.Print("SpeechRecognized");
+            Console.WriteLine("SpeechRecognized");
 
             foreach (var a in e.Result.Alternates)
             {
@@ -68,23 +62,23 @@ namespace SpeechRecognitionConsole
                 Debug.Print("e.Result.Words.Text: {0}", w.Text);
             }
 
-            Debug.Print("e.Result.Text: {0}", e.Result.Text);
-            Debug.Print("e.Result.Confidence: {0}", e.Result.Confidence);
+            Console.WriteLine("e.Result.Text: {0}", e.Result.Text);
+            Console.WriteLine("e.Result.Confidence: {0}", e.Result.Confidence);
         }
 
         static void SpeechRecognitionEngine_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)
         {
-            Debug.Print("SpeechHypothesized");
+            Console.WriteLine("SpeechHypothesized");
         }
 
         static void SpeechRecognitionEngine_SpeechDetected(object sender, SpeechDetectedEventArgs e)
         {
-            Debug.Print("SpeechDetected");
+            Console.WriteLine("SpeechDetected");
         }
 
         static void SpeechRecognistionEngine_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
         {
-            Debug.Print("RecognizeCompleted");
+            Console.WriteLine("RecognizeCompleted");
         }
     }
 }

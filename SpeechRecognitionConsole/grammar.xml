@@ -1,0 +1,37 @@
+﻿<grammar version="1.0" xml:lang="ja-JP" root="rootRule"
+ xmlns="http://www.w3.org/2001/06/grammar">
+
+  <rule id="rootRule">
+    <one-of>
+      <item>生活満足度</item>
+      <item>教育</item>
+      <item>福祉</item>
+      <item>環境</item>
+      <item>人口</item>
+      <item>豊洲</item>
+      <item>辰巳</item>
+      <item>東雲</item>
+      <item>病院</item>
+      <item>総合病院</item>
+      <item>歯医者</item>
+      <item>商業施設</item>
+      <item>デパート</item>
+      <item>スーパー</item>
+      <item>コンビニ</item>
+      <item>映画館</item>
+      <item>公園</item>
+      <item>保育園</item>
+      <item>幼稚園</item>
+      <item>小学校</item>
+      <item>中学校</item>
+      <item>高校</item>
+      <item>大学</item>
+      <item>会社</item>
+      <item>OK</item>
+      <item>決定</item>
+      <item>中止</item>
+      <item>キャンセル</item>
+    </one-of>
+  </rule>
+
+</grammar>
