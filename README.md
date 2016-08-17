@@ -1,7 +1,16 @@
-# 目的
+# 概要
 - Kinectからの音声を認識したい
 - 入力は既定の音声入力デバイスを指定するため、Kinectが無くてもマイクがあれば動く
 - Kinectでやる場合はKinectを既定のデバイスに指定する
+- System.SpeechではなくMicrosoft.Speechを使用する（後述）
+
+# 環境
+- Visual Studio 2013
+- .NET Framework 4.5
+- C# 5.0
+- Microsoft Speech Platform SDK (x86) v.11.0
+- Microsoft Server Speech Platform Runtime(x86)
+- Microsoft Server Speech Recognition Engine - TELE(ja-JP)
 
 # 参考
 - [音声認識 - .NET デスクトップ アプリと音声認識](https://msdn.microsoft.com/ja-jp/magazine/dn857362.aspx)
