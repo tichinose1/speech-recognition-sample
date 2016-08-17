@@ -69,6 +69,7 @@ namespace SpeechRecognitionConsole
             }
 
             Debug.Print("e.Result.Text: {0}", e.Result.Text);
+            Debug.Print("e.Result.Confidence: {0}", e.Result.Confidence);
         }
 
         static void SpeechRecognitionEngine_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)
