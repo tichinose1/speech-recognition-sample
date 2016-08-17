@@ -1,7 +1,8 @@
 ﻿using Microsoft.Speech.Recognition;
+using SpeechRecognitionConsole.Properties;
 using System;
 using System.Diagnostics;
-using System.Linq;
+using System.Globalization;
 
 namespace SpeechRecognitionConsole
 {
@@ -9,16 +10,14 @@ namespace SpeechRecognitionConsole
     {
         static void Main(string[] args)
         {
-            Recognize();
+            Execute();
 
             Console.ReadLine();
         }
 
-        static void Recognize()
+        static void Execute()
         {
-            var recognizer = GetRecognizer();
-
-            var engine = new SpeechRecognitionEngine(recognizer);
+            var engine = new SpeechRecognitionEngine(new CultureInfo(Settings.Default.Culture));
             engine.SetInputToDefaultAudioDevice();
             engine.SpeechDetected += SpeechRecognitionEngine_SpeechDetected;
             engine.SpeechHypothesized += SpeechRecognitionEngine_SpeechHypothesized;
@@ -30,7 +29,7 @@ namespace SpeechRecognitionConsole
             {
                 "生活満足度",
                 "せいかつまんぞくど",
-                "あおいろ"
+                "冷蔵庫"
             })));
             engine.LoadGrammarAsync(grammar);
 
@@ -39,56 +38,52 @@ namespace SpeechRecognitionConsole
 
         static void SpeechRecognitionEngine_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
         {
-            Debug.WriteLine("SpeechRecognitionRejected");
+            Debug.Print("SpeechRecognitionRejected");
         }
 
         static void SpeechRecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            Debug.WriteLine("SpeechRecognized");
-            foreach (var alternate in e.Result.Alternates)
+            Debug.Print("SpeechRecognized");
+
+            foreach (var a in e.Result.Alternates)
             {
-                foreach (var unit in alternate.ReplacementWordUnits)
+                foreach (var u in a.ReplacementWordUnits)
+                    Debug.Print("e.Result.Alternates.ReplacementWordUnits.Text: {0}", u.Text);
+
+                foreach (var w in a.Words)
                 {
-                    Debug.WriteLine("Alternates.ReplacementWordUnits.Text: {0}", unit.Text);
-                }
-                foreach (var word in alternate.Words)
-                {
-                    Debug.WriteLine("Alternates.Words.LexicalForm: {0}", word.LexicalForm);
-                    Debug.WriteLine("Alternates.Words.Pronunciation: {0}", word.Pronunciation);
-                    Debug.WriteLine("Alternates.Words.Text: {0}", word.Text);
+                    Debug.Print("e.Result.Alternates.Words.LexicalForm: {0}", w.LexicalForm);
+                    Debug.Print("e.Result.Alternates.Words.Pronunciation: {0}", w.Pronunciation);
+                    Debug.Print("e.Result.Alternates.Words.Text: {0}", w.Text);
                 }
             }
-            foreach (var item in e.Result.ReplacementWordUnits)
+
+            foreach (var u in e.Result.ReplacementWordUnits)
+                Debug.Print("e.Result.ReplacementWordUnits.Text: {0}", u.Text);
+
+            foreach (var w in e.Result.Words)
             {
-                Debug.WriteLine("ReplacementWordUnits.Text: {0}", item.Text);
+                Debug.Print("e.Result.Words.LexicalForm: {0}", w.LexicalForm);
+                Debug.Print("e.Result.Words.Pronunciation: {0}", w.Pronunciation);
+                Debug.Print("e.Result.Words.Text: {0}", w.Text);
             }
-            foreach (var item in e.Result.Words)
-            {
-                Debug.WriteLine("Words.LexicalForm: {0}", item.LexicalForm);
-                Debug.WriteLine("Words.Pronunciation: {0}", item.Pronunciation);
-                Debug.WriteLine("Words.Text: {0}", item.Text);
-            }
-            Debug.WriteLine("Text: {0}", e.Result.Text);
+
+            Debug.Print("e.Result.Text: {0}", e.Result.Text);
         }
 
         static void SpeechRecognitionEngine_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)
         {
-            Debug.WriteLine("SpeechHypothesized");
+            Debug.Print("SpeechHypothesized");
         }
 
         static void SpeechRecognitionEngine_SpeechDetected(object sender, SpeechDetectedEventArgs e)
         {
-            Debug.WriteLine("SpeechDetected");
+            Debug.Print("SpeechDetected");
         }
 
         static void SpeechRecognistionEngine_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
         {
-            Debug.WriteLine("RecognizeCompleted");
-        }
-
-        static RecognizerInfo GetRecognizer()
-        {
-            return SpeechRecognitionEngine.InstalledRecognizers().First(r => r.Culture.Name == "ja-JP");
+            Debug.Print("RecognizeCompleted");
         }
     }
 }
