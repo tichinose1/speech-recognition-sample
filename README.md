@@ -9,10 +9,20 @@
 - 音声はKinectから取得することを想定しているが、マイクさえあれば実行可能
 - Kinectを音声入力デバイスとして使用する場合はPCの設定でKinectを既定に指定する
 
+# ソリューション構成
+## SpeechRecognitionConsole
+- `Microsoft.Speech`を使用した音声認識
+
+## SpeechRecognitionConsole2
+- `System.Speech`を使用した音声認識
+
 # 環境
 - Visual Studio 2013
 - .NET Framework 4.5
 - C# 5.0
+
+SpeechRecognitionConsoleでは追加で以下のインストールが必要
+
 - Microsoft Speech Platform SDK (x86) v.11.0
 - Microsoft Server Speech Platform Runtime (x86)
 - Microsoft Server Speech Recognition Engine - TELE (ja-JP)
@@ -43,4 +53,5 @@
 
 # TODO
 - [x] 認識したい単語を外出しする
+- [ ] Cognitive Servicesを使用した音声認識
 - [ ] 代替ワード、単語の組み合わせによるコマンド・フレーズレベルを定義する
